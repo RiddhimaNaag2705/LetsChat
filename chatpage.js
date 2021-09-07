@@ -30,3 +30,8 @@ function redirectToRoomName(name){
   localStorage.setItem("groupname", name);
   window.location="chatroom.html";
 }
+function signout(){
+  localStorage.removeItem("User");
+  localStorage.removeItem("groupname");
+  window.location="index.html";
+}
