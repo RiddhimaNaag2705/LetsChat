@@ -11,6 +11,22 @@ var firebaseConfig = {
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  user_name=localStorage.getItem("User");
+  document.getElementById("user_name").innerHTML="Welcome "+user_name+"!";
+  function addgroup(){
+    group_name=document.getElementById("group-name").value;
+    firebase.database().ref("/").child(group_name).update({
+      purpose: "adding group name"
+    });
+    localStorage.setItem("groupname", group_name);
+   window.location="chatroom.html";
+  }
  function getData() { firebase.database().ref("/").on('value', function(snapshot) { document.getElementById("output").innerHTML = ""; snapshot.forEach(function(childSnapshot) { childKey = childSnapshot.key;
 Room_names=childKey;
+row="<div class='groupName' id='"+Room_names+"' onclick='redirectToRoomName(this.id)'>#"+Room_names+"</div><hr>";
+document.getElementById("output").innerHTML+=row;
 });});}
+function redirectToRoomName(name){
+  localStorage.setItem("groupname", name);
+  window.location="chatroom.html";
+}
